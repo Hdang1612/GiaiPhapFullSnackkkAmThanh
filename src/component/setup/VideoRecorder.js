@@ -83,29 +83,18 @@ const VideoRecorder = () => {
       title: "Ngày tạo ",
       dataIndex: "createAt",
       key: "createAt",
-      // render: (createdAtArray) => {
-      //   const formatDateTimeFromArray = (createdAtArray) => {
-      //     const date = new Date(
-      //       createdAtArray[0],
-      //       createdAtArray[1] - 1,
-      //       createdAtArray[2],
-      //       createdAtArray[3],
-      //       createdAtArray[4],
-      //       createdAtArray[5]
-      //     );
-      //     const hours = date.getHours().toString().padStart(2, '0');
-      //     const minutes = date.getMinutes().toString().padStart(2, '0');
-      //     const seconds = date.getSeconds().toString().padStart(2, '0');
-      //     const day = date.getDate();
-      //     const month = date.getMonth() + 1;
-      //     const year = date.getFullYear();
-      //     return `${hours}:${minutes}:${seconds} ngày ${day} tháng ${month} năm ${year}`;
-      //   };
+      render: (createAt) => {
+        const year = createAt[0];
+        const month = createAt[1];
+        const day = createAt[2];
+        const hours = createAt[3];
+        const minutes = createAt[4];
+        const seconds = createAt[5];
+    
+    return `${hours}:${minutes}:${seconds} ngày ${day} tháng ${month} năm ${year}`;
   
-      //   const formattedDateTime = formatDateTimeFromArray(createdAtArray);
-        
-      //   return formattedDateTime;
-      // },
+       
+      },
     },
     {
       title: "Thao tác",
@@ -242,6 +231,9 @@ const VideoRecorder = () => {
     catch (error) {
       console.error('Error uploading video:', error);
     }
+    finally {
+      message.success("Upload thành công!");
+    }
   };
 
   const stopRecording = () => {
@@ -307,15 +299,15 @@ const VideoRecorder = () => {
         <div >
           <p>{currentSuggest.content}</p>
           <Flex justify='center'>
-          <button style={{marginRight:12}} onClick={handleButtonClick} disabled={uploading}>
+          <Button  type="primary" style={{marginRight:12, border:'none' }} onClick={handleButtonClick} disabled={uploading}>
             {recording ? "Dừng và lưu" : "Bắt đầu ghi"}
-          </button>
-          <button style={{marginRight:12}} onClick={handleSkip} disabled={recording || uploading}>
+          </Button>
+          <Button  type="primary" style={{marginRight:12, border:'none' }} onClick={handleSkip} disabled={recording || uploading}>
             Bỏ qua
-          </button>
-          <button style={{marginRight:12}} onClick={handleViewList} >
+          </Button>
+          <Button  type="primary" style={{marginRight:12, border:'none' }} onClick={handleViewList} >
             Xem danh sách bản ghi
-          </button>
+          </Button>
           </Flex>
         </div>
       )}
