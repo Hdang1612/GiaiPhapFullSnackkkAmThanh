@@ -37,7 +37,7 @@ const VideoRecorder = () => {
 
   const viewAction = (record) => {
     console.log(record?.filename)
-    setVideoUrl(`http://record-app.us-east-1.elasticbeanstalk.com/videos/${record.filename}?${Date.now()}`);
+    setVideoUrl(`https://recordvideobe.onrender.com/videos/${record.filename}?${Date.now()}`);
     setKey(prevKey => prevKey + 1);
     setVideoModalVisible(true);
   };
@@ -116,7 +116,7 @@ const VideoRecorder = () => {
   useEffect(() => {
     const fetchRecordList = async () => {
       try {
-        const response = await fetch('http://record-app.us-east-1.elasticbeanstalk.com/records');
+        const response = await fetch('https://recordvideobe.onrender.com/records');
         if (response.ok) {
           const data = await response.json();
           setListRecord(data);
@@ -129,7 +129,7 @@ const VideoRecorder = () => {
     };
     const fetchSuggestList = async () => {
       try {
-        const response = await fetch('http://record-app.us-east-1.elasticbeanstalk.com/suggests');
+        const response = await fetch('https://recordvideobe.onrender.com/suggests');
         if (response.ok) {
           const data = await response.json();
           setListSuggest(data);
@@ -173,12 +173,6 @@ const VideoRecorder = () => {
       }
     };
   }, []);
-  
-  // useEffect(() => {
-  //   if (videoModalVisible) {
-  //     setVideoUrl('');
-  //   }
-  // }, [videoModalVisible]);
 
   const handleDataAvailable = (event) => {
     if (event.data && event.data.size > 0) {
@@ -213,7 +207,7 @@ const VideoRecorder = () => {
     formData.append('file', blob, 'newrecorded-video.webm');
     formData.append('suggestId', currentSuggest?.id);
     try {
-      const response = await fetch(`http://record-app.us-east-1.elasticbeanstalk.com/records`, {
+      const response = await fetch(`https://recordvideobe.onrender.com/records`, {
         method: 'POST',
         headers: {
           Accept: "*/*",
@@ -266,7 +260,7 @@ const VideoRecorder = () => {
     setLoadingDelete(true);
     try {
       const response = await fetch(
-        `http://record-app.us-east-1.elasticbeanstalk.com/records/${deletingRecord.id}`,
+        `https://recordvideobe.onrender.com/records/${deletingRecord.id}`,
         {
           method: "DELETE",
           headers: {
