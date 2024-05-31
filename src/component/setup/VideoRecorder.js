@@ -20,11 +20,8 @@ const VideoRecorder = () => {
   const [currentSuggest, setCurrentSuggest] = useState(null);
   const [confirmDelete,setConfirmDelete]=useState(false)
   const [deletingRecord,setDeletingRecord]=useState(null)
-  const [viewRecord, setViewRecord] = useState(null)
-  const [loadingView, setLoadingView] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [viewList,setViewList]=useState(false)
-  const [viewDetail,setViewDetail]=useState(false)
   const [videoModalVisible, setVideoModalVisible] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
   const [key, setKey] = useState(0);
@@ -163,6 +160,7 @@ const VideoRecorder = () => {
     const startWebcam = (stream) => {
       window.stream = stream;
       videoRef.current.srcObject = stream;
+      videoRef.current.muted = true;
     };
 
     init();
